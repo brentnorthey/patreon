@@ -1,11 +1,32 @@
 class Lightbox {
 
   constructor(images) {
-    this.images = images;
+    this.images = images.data.images;
   }
 
-  _showImages () {
-    console.log(this.images);
+  _getImageURL(index) {
+    console.log(this.images[index].link);
+  }
+
+  _getImageTitle(index) {
+    console.log(this.images[index].description);
+  }
+
+  _getImages() {
+    return this.images;
+  }
+
+  _showThumbs() {
+    let images = this._getImages();
+    let output = [];
+    images.forEach(function (element, index) {
+
+      let image = document.createElement('img');
+      image.setAttribute('src', element.link);
+      image.setAttribute('class', 'filmstrip__thumb');
+      image.setAttribute('data-imageid', index);
+      document.getElementById('filmstrip').appendChild(image);
+    });
   }
 }
 
@@ -59,6 +80,7 @@ function processRequest(response_text) {
   } else {
     let json = JSON.parse(response_text);
     images = new Lightbox(json);
+    images._showThumbs();
   }
 }
 
