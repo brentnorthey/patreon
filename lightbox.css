@@ -63,14 +63,16 @@ ul {
 .filmstrip {
     background: #000;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     height: 20vh;
+    overflow-x: scroll;
 }
 
 .filmstrip__thumb {
     background: darkorange;
     border-radius: .25rem;
     margin: .3rem;
+    height: 10rem;
     width: 10rem;
     z-index: 10;
 }
