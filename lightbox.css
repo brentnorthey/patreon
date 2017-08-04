@@ -10,6 +10,7 @@ body {
     font-family: Tahoma, Geneva, Sans-Serif;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 ul {
@@ -71,6 +72,10 @@ ul {
     justify-content: space-around;
     margin: 0 auto;
     width: 50%;
+}
+
+.info__bar{
+
 }
 
 #filmstrip {
