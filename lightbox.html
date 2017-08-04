@@ -7,14 +7,37 @@
 </head>
 <body>
 <div class="lightbox">
-    <div class="lightbox__cover"></div>
-
-    <div class="photo photo--standard photo--centered">
-        <div class="photo__image">No Photo</div>
-        <div class="photo__title">Title</div>
+    <div id="btn--prev">
+        <svg width="36px" height="151px" viewBox="0 0 36 151" version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+               fill-rule="evenodd">
+                <polygon id="Triangle" fill="#919191"
+                         transform="translate(17.957031, 75.671875) rotate(-180.000000) translate(-17.957031, -75.671875) "
+                         points="35.4570313 75.671875 0.45703125 150.671875 0.45703125 0.671875"></polygon>
+            </g>
+        </svg>
     </div>
-
+    <div class="photo photo--centered">
+        <div id="photo--image" class="photo__image">
+        </div>
+    </div>
+    <div id="btn--next">
+        <svg width="36px" height="151px" viewBox="0 0 36 151" version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+               fill-rule="evenodd">
+                <polygon id="Triangle" fill="#919191"
+                         points="35.4570313 75.671875 0.45703125 150.671875 0.45703125 0.671875"></polygon>
+            </g>
+        </svg>
+    </div>
 </div>
+
+    <div id="photo--title" class="photo__title">No Photo Selected</div>
+
 <div id="filmstrip">
 </div>
 </body>

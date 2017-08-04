@@ -1,11 +1,11 @@
-html {
+﻿html {
     margin: 0;
     padding: 0;
     font-size: 18px;
 }
 
 body {
-    background: #000;
+    background: #1E1E1E;
     color: darkorange;
     font-family: Tahoma, Geneva, Sans-Serif;
     margin: 0;
@@ -17,9 +17,11 @@ ul {
 }
 
 .lightbox {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
     position: relative;
-    background: red;
-    height: 80vh;
+    height: 70vh;
 }
 
 .lightbox__cover {
@@ -30,25 +32,32 @@ ul {
 }
 
 .photo {
-    border-radius: .25rem;
-    position: absolute;
-    height: 20rem;
-    width: 20rem;
-    z-index: 10;
+    display:flex;
+    width: 65%;
+    order: 2;
 }
 
 .photo__image {
-    width: 20rem;
-}
-
-.photo__title {
-    background: #FFF;
+    border-radius: .50rem;
+    display: flex;
+    justify-content: space-around;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center, center;
     width: 100%;
 }
 
-.photo--standard {
-    background-color: #EEE;
-    border: .1rem solid #EEE;
+.photo__title {
+    align-items: center;
+    background: #4D4E4E;
+    border-radius: .25rem;
+    display: flex;
+    color: #CCC;
+    height: 5vh;
+    justify-content: space-around;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 65%;
 }
 
 .photo--centered {
@@ -62,12 +71,11 @@ ul {
 
 #filmstrip {
     align-items: center;
-    background: #000;
+    background: #1E1E1E;
     display: flex;
     flex-wrap: nowrap;
-    height: 20vh;
+    height: 30vh;
     justify-content: space-between;
-    margim: 1rem;
     overflow-x: scroll;
 }
 
@@ -75,7 +83,15 @@ ul {
     background: darkorange;
     border-radius: .25rem;
     margin: .3rem;
-    height: auto;
-    width: 10rem;
-    z-index: 10;
+    height: 8rem;
+}
+
+#btn--prev {
+    order: 1;
+    margin: 3rem;
+}
+
+#btn--next {
+    order: 3;
+    margin: 3rem;
 }

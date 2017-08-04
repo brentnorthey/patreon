@@ -2,55 +2,74 @@ class Lightbox {
 
   constructor(images) {
     this.images = images.data.images;
+    this.currentIndex = 0;
   }
 
   _getImageURL(index) {
-    console.log(this.images[index].link);
+    return this.images[index].link;
   }
 
   _getImageTitle(index) {
-    console.log(this.images[index].description);
+    return this.images[index].description;
   }
 
   _getImages() {
     return this.images;
   }
 
+  _setImages(images) {
+    this.images = images.data.images;
+  }
+
+  _setCurrentImageIndex(index) {
+    this.currentIndex = index;
+  }
+
+  _getCurrentImageIndex() {
+    return this.currentIndex;
+  }
+
   _showThumbs() {
     let images = this._getImages();
-    let output = [];
     images.forEach(function (element, index) {
 
       let image = document.createElement('img');
       image.setAttribute('src', element.link);
       image.setAttribute('class', 'filmstrip__thumb');
-      image.setAttribute('data-imageid', index);
+      image.setAttribute('data-index', index);
+      image.setAttribute('data-title', element.description);
+      image.addEventListener('click', loadImage);
       document.getElementById('filmstrip').appendChild(image);
     });
   }
 }
 
-class Image {
-  constructor(image) {
-    this.image = image;
-  }
+function loadImage() {
+  images._setCurrentImageIndex(this.dataset.index);
+  document.getElementById('photo--image').style.backgroundImage = "url('"+this.src+"')";
+  document.getElementById('photo--title').innerHTML = this.dataset.title;
+}
 
-  _setImage(image) {
-    this.image = image;
-  }
+function prevImage() {
+  let currentIndex = images._getCurrentImageIndex();
 
-  _getImage(image) {
-    return this.image;
+  if (currentIndex > 0) {
+    let newIndex = parseInt(images._getCurrentImageIndex(),10) - 1;
+    images._setCurrentImageIndex(newIndex);
+    document.getElementById('photo--image').style.backgroundImage = "url('"+ images._getImageURL(newIndex)+"')";
+    document.getElementById('photo--title').innerHTML = images._getImageTitle(newIndex);
   }
+}
 
-  _nextImage() {
-    console.log("load next image called");
+function nextImage() {
+  let currentIndex = images._getCurrentImageIndex();
+
+  if (currentIndex < images._getImages().length) {
+    let newIndex = parseInt(images._getCurrentImageIndex(),10) + 1;
+    images._setCurrentImageIndex(newIndex);
+    document.getElementById('photo--image').style.backgroundImage = "url('"+ images._getImageURL(newIndex)+"')";
+    document.getElementById('photo--title').innerHTML = images._getImageTitle(newIndex);
   }
-
-  _previousImage() {
-    console.log("load previous called");
-  }
-
 }
 
 let album_id = 'nFMJR';
@@ -80,25 +99,19 @@ function processRequest(response_text) {
   } else {
     let json = JSON.parse(response_text);
     images = new Lightbox(json);
+    document.getElementById('btn--prev').addEventListener('click', prevImage);
+    document.getElementById('btn--next').addEventListener('click', nextImage);
     images._showThumbs();
   }
 }
 
 /* Initialize after DOM is ready */
-let execute = function () {
+let init = function () {
   requestAlbum();
 };
 
 if (!!(window.addEventListener))
-  window.addEventListener("DOMContentLoaded", execute)
+  window.addEventListener("DOMContentLoaded", init)
 else // MSIE to be safe
-  window.attachEvent("onload", execute)
-
-/*
-  btn.addEventListener('click', function () {
-    this.style.display = 'none';
-    request.send();
-  });
-
-*/
+  window.attachEvent("onload", init);
 
