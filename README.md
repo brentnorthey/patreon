@@ -30,6 +30,10 @@ No webserver required.
 Written in pure JS, CSS and HTML. All code runs in latest, Chrome, FireFox and Safari
 
 ```
+<<<<<<< HEAD
 Images and captions may be authored using imgur.com's website.
+=======
+Images and camptions may be authored using imgur.com's website.
+>>>>>>> 12972110f79e1264e7d8ab6845ca164f16b95b9a
 Demonstration available upon request.
 ```
