@@ -47,7 +47,9 @@ class Lightbox {
 function loadImage() {
   images._setCurrentImageIndex(this.dataset.index);
   document.getElementById('photo--image').style.backgroundImage = "url('"+this.src+"')";
-  document.getElementById('photo--title').innerHTML = this.dataset.title;
+  document.getElementById('photo--image').innerHTML  = "";
+  document.getElementById('photo--title').innerHTML = this.dataset.title != "null" ? this.dataset.title : "...";
+  loadInfo();
 }
 
 function prevImage() {
@@ -57,19 +59,29 @@ function prevImage() {
     let newIndex = parseInt(images._getCurrentImageIndex(),10) - 1;
     images._setCurrentImageIndex(newIndex);
     document.getElementById('photo--image').style.backgroundImage = "url('"+ images._getImageURL(newIndex)+"')";
-    document.getElementById('photo--title').innerHTML = images._getImageTitle(newIndex);
+    document.getElementById('photo--image').innerHTML  = "";
+    document.getElementById('photo--title').innerHTML =  images._getImageTitle(newIndex) != "null" ?  images._getImageTitle(newIndex) : "...";
+    loadInfo();
   }
 }
 
 function nextImage() {
   let currentIndex = images._getCurrentImageIndex();
 
-  if (currentIndex < images._getImages().length) {
+  if (currentIndex <= images._getImages().length) {
     let newIndex = parseInt(images._getCurrentImageIndex(),10) + 1;
     images._setCurrentImageIndex(newIndex);
     document.getElementById('photo--image').style.backgroundImage = "url('"+ images._getImageURL(newIndex)+"')";
-    document.getElementById('photo--title').innerHTML = images._getImageTitle(newIndex);
+    document.getElementById('photo--image').innerHTML  = "";
+    document.getElementById('photo--title').innerHTML =images._getImageTitle(newIndex) != "null" ?  images._getImageTitle(newIndex) : "...";
+    loadInfo();
+
   }
+}
+
+function loadInfo(){
+  document.getElementById('info__index').innerHTML = images._getCurrentImageIndex();
+  document.getElementById('info__length').innerHTML = images._getImages().length;
 }
 
 let album_id = 'nFMJR';
@@ -102,6 +114,7 @@ function processRequest(response_text) {
     document.getElementById('btn--prev').addEventListener('click', prevImage);
     document.getElementById('btn--next').addEventListener('click', nextImage);
     images._showThumbs();
+    loadInfo();
   }
 }
 
