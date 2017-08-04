@@ -55,7 +55,6 @@ ul {
 
 .photo__title {
     align-items: center;
-    /*background: #4D4E4E;*/
     border-radius: .25rem;
     display: flex;
     color: #CCC;
@@ -74,9 +73,11 @@ ul {
 }
 
 .info {
+    align-items: center;
     display: flex;
     text-align: center;
-    font-size: .8rem;
+    font-size: 1rem;
+    font-weight: 100;
     justify-content: space-around;
     margin: 0 auto;
     width: 50%;

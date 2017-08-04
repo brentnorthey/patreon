@@ -1,3 +1,33 @@
+/**
+ * @summary Lightbox class, displays images from json object pulled from Imgur.com
+ *
+ *
+ * @since 0.0.1
+ * @deprecated x.x.x Use new_function_name() instead.
+ * @access private
+ *
+ * @class
+ * @augments JSON of image objects
+ *
+ * @images images to be displayed in the lightbox
+ * @currentIndex Current image displayed
+ * @prevBtn A reference to the previous button
+ * @nextBtn A reference to the next button
+ * @infoIndex A reference to the infoIndex DOM Object
+ * @infoLength A reference to the ingoLength DOM Object
+ *
+ * @_getImageURL Returns image URL based on index
+ * @_getImageTitle Returns image title based on index
+ * @_getImages Returns the images object
+ * @_setImages Sets the images object
+ * @_setCurrentImageIndex Sets the current index
+ * @_getCurrentImageIndex Returns the current index
+ * @_showThumbnails Renders the images object into the thumbnails
+ * @_prevImage Renders the previous image
+ * @_nextImage Renders the next image
+ *
+ */
+
 class Lightbox {
 
   constructor(images) {

@@ -24,5 +24,13 @@ No webserver required.
 ```
 ~/username/patreon/lightbox.html
 
+```
+### Details
+
+Written in pure JS, CSS and HTML.
+
+
+```
+Images may be authored using Imgurs website
 
 ```
