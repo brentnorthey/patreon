@@ -27,10 +27,9 @@ No webserver required.
 ```
 ### Details
 
-Written in pure JS, CSS and HTML.
-
+Written in pure JS, CSS and HTML. All code runs in latest, Chrome, FireFox and Safari
 
 ```
-Images may be authored using Imgurs website
-
+Images and camptions may be authored using imgur.com's website.
+Demonstration available upon request.
 ```
