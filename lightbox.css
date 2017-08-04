@@ -17,7 +17,6 @@ ul {
 }
 
 .lightbox {
-    position: absolute;
     margin: 3rem 0 0 0;
     align-items: center;
     display: flex;
@@ -34,7 +33,7 @@ ul {
 }
 
 .photo {
-    border-radius: .50rem;
+    border-radius: 5%;
     display: flex;
     width: 100%;
 
@@ -61,15 +60,6 @@ ul {
     height: 2rem;
     justify-content: space-around;
     text-align: center;
-}
-
-.photo--centered {
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
 }
 
 .info {

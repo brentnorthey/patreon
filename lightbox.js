@@ -25,7 +25,6 @@
  * @_showThumbnails Renders the images object into the thumbnails
  * @_prevImage Renders the previous image
  * @_nextImage Renders the next image
- *
  */
 
 class Lightbox {
@@ -61,7 +60,7 @@ class Lightbox {
   }
 
   _getCurrentImageIndex() {
-    return this.currentIndex;
+    return parseInt(this.currentIndex);
   }
 
   _loadInfo() {
@@ -71,7 +70,6 @@ class Lightbox {
 
   _showThumbs() {
     let images = this._getImages();
-    console.log(this)
     images.forEach(function (element, index) {
       let image = document.createElement('img');
       image.setAttribute('src', element.link);
@@ -85,9 +83,8 @@ class Lightbox {
 
   _prevImage() {
     let currentIndex = this._getCurrentImageIndex();
-
     if (currentIndex > 0) {
-      let newIndex = parseInt(this._getCurrentImageIndex(), 10) - 1;
+      let newIndex = currentIndex - 1;
       this._setCurrentImageIndex(newIndex);
       document.getElementById('photo--image').style.backgroundImage = "url('" + this._getImageURL(newIndex) + "')";
       document.getElementById('photo--image').innerHTML = "";
@@ -98,9 +95,8 @@ class Lightbox {
 
   _nextImage() {
     let currentIndex = this._getCurrentImageIndex();
-
-    if (currentIndex <= this._getImages().length) {
-      let newIndex = parseInt(this._getCurrentImageIndex(), 10) + 1;
+    if (currentIndex < parseInt(this._getImages().length)-1) {
+      let newIndex = currentIndex + 1;
       this._setCurrentImageIndex(newIndex);
       document.getElementById('photo--image').style.backgroundImage = "url('" + this._getImageURL(newIndex) + "')";
       document.getElementById('photo--image').innerHTML = "";
