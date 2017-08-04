@@ -3,6 +3,11 @@ class Lightbox {
   constructor(images) {
     this.images = images.data.images;
     this.currentIndex = 0;
+    this.prevBtn = document.getElementById('btn--prev').addEventListener('click', this._prevImage.bind(this));
+    this.nextBtn = document.getElementById('btn--next').addEventListener('click', this._nextImage.bind(this));
+    this.infoIndex = document.getElementById('info__index').innerHTML = parseInt(this._getCurrentImageIndex(), 10) + 1;
+    this.infoLength = document.getElementById('info__length').innerHTML = this._getImages().length;
+    this._showThumbs();
   }
 
   _getImageURL(index) {
@@ -29,10 +34,15 @@ class Lightbox {
     return this.currentIndex;
   }
 
+  _loadInfo() {
+    document.getElementById('info__index').innerHTML = parseInt(this._getCurrentImageIndex(), 10) + 1;
+    document.getElementById('info__length').innerHTML = this._getImages().length;
+  }
+
   _showThumbs() {
     let images = this._getImages();
+    console.log(this)
     images.forEach(function (element, index) {
-
       let image = document.createElement('img');
       image.setAttribute('src', element.link);
       image.setAttribute('class', 'filmstrip__thumb');
@@ -42,46 +52,32 @@ class Lightbox {
       document.getElementById('filmstrip').appendChild(image);
     });
   }
-}
 
-function loadImage() {
-  images._setCurrentImageIndex(this.dataset.index);
-  document.getElementById('photo--image').style.backgroundImage = "url('"+this.src+"')";
-  document.getElementById('photo--image').innerHTML  = "";
-  document.getElementById('photo--title').innerHTML = this.dataset.title != "null" ? this.dataset.title : "...";
-  loadInfo();
-}
+  _prevImage() {
+    let currentIndex = this._getCurrentImageIndex();
 
-function prevImage() {
-  let currentIndex = images._getCurrentImageIndex();
-
-  if (currentIndex > 0) {
-    let newIndex = parseInt(images._getCurrentImageIndex(),10) - 1;
-    images._setCurrentImageIndex(newIndex);
-    document.getElementById('photo--image').style.backgroundImage = "url('"+ images._getImageURL(newIndex)+"')";
-    document.getElementById('photo--image').innerHTML  = "";
-    document.getElementById('photo--title').innerHTML =  images._getImageTitle(newIndex) != "null" ?  images._getImageTitle(newIndex) : "...";
-    loadInfo();
+    if (currentIndex > 0) {
+      let newIndex = parseInt(this._getCurrentImageIndex(), 10) - 1;
+      this._setCurrentImageIndex(newIndex);
+      document.getElementById('photo--image').style.backgroundImage = "url('" + this._getImageURL(newIndex) + "')";
+      document.getElementById('photo--image').innerHTML = "";
+      document.getElementById('photo--title').innerHTML = this._getImageTitle(newIndex) != "null" ? this._getImageTitle(newIndex) : "...";
+      this._loadInfo();
+    }
   }
-}
 
-function nextImage() {
-  let currentIndex = images._getCurrentImageIndex();
+  _nextImage() {
+    let currentIndex = this._getCurrentImageIndex();
 
-  if (currentIndex <= images._getImages().length) {
-    let newIndex = parseInt(images._getCurrentImageIndex(),10) + 1;
-    images._setCurrentImageIndex(newIndex);
-    document.getElementById('photo--image').style.backgroundImage = "url('"+ images._getImageURL(newIndex)+"')";
-    document.getElementById('photo--image').innerHTML  = "";
-    document.getElementById('photo--title').innerHTML =images._getImageTitle(newIndex) != "null" ?  images._getImageTitle(newIndex) : "...";
-    loadInfo();
-
+    if (currentIndex <= this._getImages().length) {
+      let newIndex = parseInt(this._getCurrentImageIndex(), 10) + 1;
+      this._setCurrentImageIndex(newIndex);
+      document.getElementById('photo--image').style.backgroundImage = "url('" + this._getImageURL(newIndex) + "')";
+      document.getElementById('photo--image').innerHTML = "";
+      document.getElementById('photo--title').innerHTML = this._getImageTitle(newIndex) != "null" ? this._getImageTitle(newIndex) : "...";
+      this._loadInfo();
+    }
   }
-}
-
-function loadInfo(){
-  document.getElementById('info__index').innerHTML = images._getCurrentImageIndex();
-  document.getElementById('info__length').innerHTML = images._getImages().length;
 }
 
 let album_id = 'nFMJR';
@@ -111,11 +107,15 @@ function processRequest(response_text) {
   } else {
     let json = JSON.parse(response_text);
     images = new Lightbox(json);
-    document.getElementById('btn--prev').addEventListener('click', prevImage);
-    document.getElementById('btn--next').addEventListener('click', nextImage);
-    images._showThumbs();
-    loadInfo();
   }
+}
+
+function loadImage(e) {
+  images._setCurrentImageIndex(e.target.dataset.index);
+  document.getElementById('photo--image').style.backgroundImage = "url('" + e.target.src + "')";
+  document.getElementById('photo--image').innerHTML = "";
+  document.getElementById('photo--title').innerHTML = e.target.dataset.title != "null" ? e.target.dataset.title : "...";
+  images._loadInfo();
 }
 
 /* Initialize after DOM is ready */
